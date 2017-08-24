@@ -10,7 +10,8 @@ class TagsController < ApplicationController
   end
 
   def index
-    @tags = current_user.tags.page(params[:page]).per(10)
+    @q = current_user.tags.ransack(params[:q])
+      @tags = @q.result(:distinct => true).includes(:video, :user).page(params[:page]).per(10)
 
     render("tags/index.html.erb")
   end

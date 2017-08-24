@@ -1,6 +1,7 @@
 class PlatformsController < ApplicationController
   def index
-    @platforms = Platform.page(params[:page]).per(10)
+    @q = Platform.ransack(params[:q])
+    @platforms = @q.result(:distinct => true).includes(:videos).page(params[:page]).per(10)
 
     render("platforms/index.html.erb")
   end
