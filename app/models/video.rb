@@ -5,4 +5,6 @@ class Video < ApplicationRecord
 
   # Validations
 
+  validates :videolink, :presence => { :message => "Please enter a video link" }
+
 end
