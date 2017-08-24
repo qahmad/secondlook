@@ -33,7 +33,7 @@
           Video
         </label>
 
-        <input type="text" id="video_id" name="video_id" placeholder="Video" class="form-control" value="<%= @tag.video_id %>">
+        <%= select_tag(:video_id, options_from_collection_for_select(Video.all, :id, :caption, @tag.video_id), :class => "form-control") %>
       </div>
 
       <button class="btn btn-warning">
