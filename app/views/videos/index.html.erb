@@ -22,8 +22,20 @@
         <td><%= video.caption %></td>
         <td><%= video.videolink %></td>
         <td><%= video.starttime %></td>
-        <td><%= video.user.email %></td>
-        <td><%= video.platform.name %></td>
+        <td>
+          <% if video.user.present? %>
+            <a href="/users/<%= video.user.id %>">
+              <%= video.user.email %>
+            </a>
+          <% end %>
+        </td>
+        <td>
+          <% if video.platform.present? %>
+            <a href="/platforms/<%= video.platform.id %>">
+              <%= video.platform.name %>
+            </a>
+          <% end %>
+        </td>
         <td>
           <a href="/videos/<%= video.id %>" class="btn btn-primary">Show</a>
           

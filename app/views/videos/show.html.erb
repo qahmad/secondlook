@@ -15,10 +15,22 @@
       <dd><%= @video.starttime %></dd>
 
       <dt>User</dt>
-      <dd><%= @video.user_id %></dd>
+      <dd>
+        <% if @video.user.present? %>
+          <a href="/users/<%= @video.user_id %>">
+            <%= @video.user.email %>
+          </a>
+        <% end %>
+      </dd>
 
       <dt>Platform</dt>
-      <dd><%= @video.platform_id %></dd>
+      <dd>
+        <% if @video.platform.present? %>
+          <a href="/platforms/<%= @video.platform_id %>">
+            <%= @video.platform.name %>
+          </a>
+        <% end %>
+      </dd>
 
     </dl>
 
