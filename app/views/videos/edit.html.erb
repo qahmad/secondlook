@@ -1,0 +1,73 @@
+<!-- Validation failure messages -->
+<% if @video.errors.any? %>
+  <% @video.errors.full_messages.each do |message| %>
+    <div class="alert alert-dismissable alert-danger">
+      <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
+      <%= message %>
+    </div>
+  <% end %>
+<% end %>
+
+<div class="page-header">
+  <h3>Edit Video #<%= @video.id %></h3>
+</div>
+
+<div class="row">
+  <div class="col-md-12">
+    <form action="/update_video/<%= @video.id %>" method="post">
+      <!-- Hidden input for authenticity token to protect from forgery -->
+      <input name="authenticity_token" type="hidden" value="<%= form_authenticity_token %>">
+
+      <!-- Label and input for caption -->
+      <div class="form-group">
+        <label for="caption" class="control-label">
+          Caption
+        </label>
+
+        <input type="text" id="caption" name="caption" placeholder="Caption" class="form-control" value="<%= @video.caption %>">
+      </div>
+
+      <!-- Label and input for videolink -->
+      <div class="form-group">
+        <label for="videolink" class="control-label">
+          Videolink
+        </label>
+
+        <input type="text" id="videolink" name="videolink" placeholder="Videolink" class="form-control" value="<%= @video.videolink %>">
+      </div>
+
+      <!-- Label and input for starttime -->
+      <div class="form-group">
+        <label for="starttime" class="control-label">
+          Starttime
+        </label>
+
+        <input type="text" id="starttime" name="starttime" placeholder="Starttime" class="form-control" value="<%= @video.starttime %>">
+      </div>
+
+      <!-- Label and input for user_id -->
+      <div class="form-group">
+        <label for="user_id" class="control-label">
+          User
+        </label>
+
+        <input type="text" id="user_id" name="user_id" placeholder="User" class="form-control" value="<%= @video.user_id %>">
+      </div>
+
+      <!-- Label and input for platform_id -->
+      <div class="form-group">
+        <label for="platform_id" class="control-label">
+          Platform
+        </label>
+
+        <input type="text" id="platform_id" name="platform_id" placeholder="Platform" class="form-control" value="<%= @video.platform_id %>">
+      </div>
+
+      <button class="btn btn-warning">
+        Update Video
+      </button>
+      or
+      <a href="/videos/<%= @video.id %>">Cancel</a>
+    </form>
+  </div>
+</div>

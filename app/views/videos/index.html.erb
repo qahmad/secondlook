@@ -1,0 +1,36 @@
+<div class="page-header">
+  <h1>
+    Videos
+    <a href="/videos/new" class="btn btn-lg btn-success">New Video</a>
+  </h1>
+</div>
+
+<div class="row">
+  <div class="col-md-12">
+    <table class="table table-striped table-hover">
+      <tr>
+        <th>Caption</th>
+        <th>Videolink</th>
+        <th>Starttime</th>
+        <th>User</th>
+        <th>Platform</th>
+        <th>Actions</th>
+      </tr>
+
+      <% @videos.each do |video| %>
+      <tr>
+        <td><%= video.caption %></td>
+        <td><%= video.videolink %></td>
+        <td><%= video.starttime %></td>
+        <td><%= video.user_id %></td>
+        <td><%= video.platform_id %></td>
+        <td>
+          <a href="/videos/<%= video.id %>" class="btn btn-primary">Show</a>
+          <a href="/videos/<%= video.id %>/edit" class="btn btn-warning">Edit</a>
+          <a href="/delete_video/<%= video.id %>" class="btn btn-danger" rel="nofollow">Delete</a>
+        </td>
+      </tr>
+      <% end %>
+    </table>
+  </div>
+</div>
