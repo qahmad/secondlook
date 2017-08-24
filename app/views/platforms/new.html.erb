@@ -1,0 +1,46 @@
+<!-- Validation failure messages -->
+<% if @platform.errors.any? %>
+  <% @platform.errors.full_messages.each do |message| %>
+    <div class="alert alert-dismissable alert-danger">
+      <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
+      <%= message %>
+    </div>
+  <% end %>
+<% end %>
+
+<div class="page-header">
+  <h3>Add Platform</h3>
+</div>
+
+<div class="row">
+  <div class="col-md-12">
+    <form action="/create_platform" method="post">
+      <!-- Hidden input for authenticity token to protect from forgery -->
+      <input name="authenticity_token" type="hidden" value="<%= form_authenticity_token %>">
+
+      <!-- Label and input for name -->
+      <div class="form-group">
+        <label for="name" class="control-label">
+          Name
+        </label>
+
+        <input type="text" id="name" name="name" placeholder="Name" class="form-control" value="<%= @platform.name %>">
+      </div>
+
+      <!-- Label and input for embed_link -->
+      <div class="form-group">
+        <label for="embed_link" class="control-label">
+          Embed link
+        </label>
+
+        <input type="text" id="embed_link" name="embed_link" placeholder="Embed link" class="form-control" value="<%= @platform.embed_link %>">
+      </div>
+
+      <button class="btn btn-success">
+        Create Platform
+      </button>
+      or
+      <a href="/platforms">Cancel</a>
+    </form>
+  </div>
+</div>

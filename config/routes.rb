@@ -1,4 +1,21 @@
 Rails.application.routes.draw do
+  # Routes for the Platform resource:
+  # CREATE
+  get "/platforms/new", :controller => "platforms", :action => "new"
+  post "/create_platform", :controller => "platforms", :action => "create"
+
+  # READ
+  get "/platforms", :controller => "platforms", :action => "index"
+  get "/platforms/:id", :controller => "platforms", :action => "show"
+
+  # UPDATE
+  get "/platforms/:id/edit", :controller => "platforms", :action => "edit"
+  post "/update_platform/:id", :controller => "platforms", :action => "update"
+
+  # DELETE
+  get "/delete_platform/:id", :controller => "platforms", :action => "destroy"
+  #------------------------------
+
   # Routes for the Comment resource:
   # CREATE
   get "/comments/new", :controller => "comments", :action => "new"
