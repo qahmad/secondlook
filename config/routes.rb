@@ -1,4 +1,11 @@
 Rails.application.routes.draw do
+  devise_for :users
+  # Routes for the User resource:
+  # READ
+  get "/users", :controller => "users", :action => "index"
+  get "/users/:id", :controller => "users", :action => "show"
+
+
   # Routes for the Video resource:
   # CREATE
   get "/videos/new", :controller => "videos", :action => "new"
