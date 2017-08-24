@@ -6,6 +6,7 @@ class PlatformsController < ApplicationController
   end
 
   def show
+    @video = Video.new
     @platform = Platform.find(params[:id])
 
     render("platforms/show.html.erb")

@@ -54,6 +54,50 @@
           </div>
         </li>
       <% end %>
+
+      <li class="list-group-item">
+        <form action="/create_video" method="post">
+      <!-- Hidden input for authenticity token to protect from forgery -->
+      <input name="authenticity_token" type="hidden" value="<%= form_authenticity_token %>">
+
+      <!-- Label and input for caption -->
+      <div class="form-group">
+        <label for="caption" class="control-label">
+          Caption
+        </label>
+
+        <input type="text" id="caption" name="caption" placeholder="Caption" class="form-control" value="">
+      </div>
+
+      <!-- Label and input for videolink -->
+      <div class="form-group">
+        <label for="videolink" class="control-label">
+          Videolink
+        </label>
+
+        <input type="text" id="videolink" name="videolink" placeholder="Videolink" class="form-control" value="">
+      </div>
+
+      <!-- Label and input for starttime -->
+      <div class="form-group">
+        <label for="starttime" class="control-label">
+          Starttime
+        </label>
+
+        <input type="text" id="starttime" name="starttime" placeholder="Starttime" class="form-control" value="">
+      </div>
+
+      <!-- Label and input for user_id -->
+      <input type="hidden" name="user_id" value="<%= current_user.id %>">
+
+      <!-- Label and input for platform_id -->
+      <input type="hidden" name="platform_id" value="<%= @platform.id %>">
+
+      <button class="btn btn-block btn-success">
+        Create Video
+      </button>
+    </form>
+      </li>
     </ul>
   </div>
 </div>

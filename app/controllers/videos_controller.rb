@@ -16,6 +16,8 @@ class VideosController < ApplicationController
   end
 
   def show
+    @comment = Comment.new
+    @tag = Tag.new
     @video = Video.find(params[:id])
 
     render("videos/show.html.erb")

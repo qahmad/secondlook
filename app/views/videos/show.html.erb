@@ -65,6 +65,23 @@
           </div>
         </li>
       <% end %>
+
+      <li class="list-group-item">
+        <form action="/create_tag" method="post">
+      <!-- Hidden input for authenticity token to protect from forgery -->
+      <input name="authenticity_token" type="hidden" value="<%= form_authenticity_token %>">
+
+      <!-- Label and input for user_id -->
+      <input type="hidden" name="user_id" value="<%= current_user.id %>">
+
+      <!-- Label and input for video_id -->
+      <input type="hidden" name="video_id" value="<%= @video.id %>">
+
+      <button class="btn btn-block btn-success">
+        Create Tag
+      </button>
+    </form>
+      </li>
     </ul>
   </div>
 </div>
@@ -96,6 +113,32 @@
           </div>
         </li>
       <% end %>
+
+      <li class="list-group-item">
+        <form action="/create_comment" method="post">
+      <!-- Hidden input for authenticity token to protect from forgery -->
+      <input name="authenticity_token" type="hidden" value="<%= form_authenticity_token %>">
+
+      <!-- Label and input for user_id -->
+      <input type="hidden" name="user_id" value="<%= current_user.id %>">
+
+      <!-- Label and input for video_id -->
+      <input type="hidden" name="video_id" value="<%= @video.id %>">
+
+      <!-- Label and input for body -->
+      <div class="form-group">
+        <label for="body" class="control-label">
+          Body
+        </label>
+
+        <input type="text" id="body" name="body" placeholder="Body" class="form-control" value="">
+      </div>
+
+      <button class="btn btn-block btn-success">
+        Create Comment
+      </button>
+    </form>
+      </li>
     </ul>
   </div>
 </div>
