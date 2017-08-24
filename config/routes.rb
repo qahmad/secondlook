@@ -1,4 +1,21 @@
 Rails.application.routes.draw do
+  # Routes for the Tag resource:
+  # CREATE
+  get "/tags/new", :controller => "tags", :action => "new"
+  post "/create_tag", :controller => "tags", :action => "create"
+
+  # READ
+  get "/tags", :controller => "tags", :action => "index"
+  get "/tags/:id", :controller => "tags", :action => "show"
+
+  # UPDATE
+  get "/tags/:id/edit", :controller => "tags", :action => "edit"
+  post "/update_tag/:id", :controller => "tags", :action => "update"
+
+  # DELETE
+  get "/delete_tag/:id", :controller => "tags", :action => "destroy"
+  #------------------------------
+
   # Routes for the Platform resource:
   # CREATE
   get "/platforms/new", :controller => "platforms", :action => "new"
