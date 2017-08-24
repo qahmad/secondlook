@@ -26,3 +26,34 @@
     </div>
   </div>
 </div>
+
+<!-- A Platform has many videos -->
+
+<div class="row">
+  <div class="col-md-12">
+    <ul class="list-group">
+      <li class="list-group-item list-group-item-info">
+        Videos
+      </li>
+
+      <% @platform.videos.each do |video| %>
+        <li class="list-group-item">
+          <a href="/videos/<%= video.id %>">
+            <%= video.caption %>
+          </a>
+          <div class="btn-group btn-group-xs pull-right">
+            <a href="/videos/<%= video.id %>" class="btn btn-primary">
+              <i class="fa fa-search-plus"></i>
+            </a>
+            <a href="/videos/<%= video.id %>/edit" class="btn btn-warning">
+              <i class="fa fa-edit"></i>
+            </a>
+            <a href="/delete_video/<%= video.id %>" class="btn btn-danger" rel="nofollow">
+              <i class="fa fa-trash-o"></i>
+            </a>
+          </div>
+        </li>
+      <% end %>
+    </ul>
+  </div>
+</div>
