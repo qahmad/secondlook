@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+  root :to => "videos#index"
   # Routes for the Tag resource:
   # CREATE
   get "/tags/new", :controller => "tags", :action => "new"
