@@ -60,7 +60,7 @@
           Platform
         </label>
 
-        <input type="text" id="platform_id" name="platform_id" placeholder="Platform" class="form-control" value="<%= @video.platform_id %>">
+        <%= select_tag(:platform_id, options_from_collection_for_select(Platform.all, :id, :name, @video.platform_id), :class => "form-control") %>
       </div>
 
       <button class="btn btn-warning">
