@@ -1,5 +1,5 @@
 class CommentsController < ApplicationController
-  before_action :current_user_must_be_comment_user, :only => [:edit, :update, :destroy]
+  before_action :current_user_must_be_comment_user, :only => [:show, :edit, :update, :destroy]
 
   def current_user_must_be_comment_user
     comment = Comment.find(params[:id])
