@@ -47,8 +47,6 @@ class TagsController < ApplicationController
 
   def update
     @tag = Tag.find(params[:id])
-
-    @tag.user_id = params[:user_id]
     @tag.video_id = params[:video_id]
 
     save_status = @tag.save
