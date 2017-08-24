@@ -17,7 +17,7 @@
       <% @tags.each do |tag| %>
       <tr>
         <td><%= tag.user.email %></td>
-        <td><%= tag.video_id %></td>
+        <td><%= tag.video.caption %></td>
         <td>
           <a href="/tags/<%= tag.id %>" class="btn btn-primary">Show</a>
           <a href="/tags/<%= tag.id %>/edit" class="btn btn-warning">Edit</a>
