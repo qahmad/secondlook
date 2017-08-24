@@ -1,6 +1,6 @@
 class PlatformsController < ApplicationController
   def index
-    @platforms = Platform.all
+    @platforms = Platform.page(params[:page]).per(10)
 
     render("platforms/index.html.erb")
   end

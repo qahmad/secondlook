@@ -10,7 +10,7 @@ class VideosController < ApplicationController
   end
 
   def index
-    @videos = Video.all
+    @videos = Video.page(params[:page]).per(10)
 
     render("videos/index.html.erb")
   end
