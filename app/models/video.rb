@@ -1,6 +1,9 @@
 class Video < ApplicationRecord
   # Direct associations
 
+  belongs_to :platform,
+             :counter_cache => true
+
   belongs_to :user,
              :counter_cache => true
 
