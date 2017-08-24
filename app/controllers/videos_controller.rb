@@ -1,4 +1,14 @@
 class VideosController < ApplicationController
+  before_action :current_user_must_be_video_user, :only => [:edit, :update, :destroy]
+
+  def current_user_must_be_video_user
+    video = Video.find(params[:id])
+
+    unless current_user == video.user
+      redirect_to :back, :alert => "You are not authorized for that."
+    end
+  end
+
   def index
     @videos = Video.all
 
