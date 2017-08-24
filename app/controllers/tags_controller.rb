@@ -10,7 +10,7 @@ class TagsController < ApplicationController
   end
 
   def index
-    @tags = Tag.all
+    @tags = current_user.tags.page(params[:page]).per(10)
 
     render("tags/index.html.erb")
   end
