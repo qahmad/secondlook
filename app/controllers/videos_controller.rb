@@ -1,3 +1,5 @@
+require 'uri'
+
 class VideosController < ApplicationController
   before_action :current_user_must_be_video_user, :only => [:show, :edit, :update, :destroy]
 
@@ -38,6 +40,15 @@ class VideosController < ApplicationController
     @video.starttime = params[:starttime]
     @video.user_id = params[:user_id]
     @video.platform_id = params[:platform_id]
+
+    if "youtu".in? @video.videolink.downcase
+
+      query_string = URI.parse(@video.videolink).query
+      parameters = Hash[URI.decode_www_form(query_string)]
+      
+      @video.videolink = @video.platform.embed_link + parameters['v'] + '?start=' + @video.starttime.to_s
+
+    end
 
     save_status = @video.save
 
