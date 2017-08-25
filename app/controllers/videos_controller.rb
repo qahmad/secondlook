@@ -116,14 +116,15 @@ class VideosController < ApplicationController
     save_status = @video.save
 
     if save_status == true
-      referer = URI(request.referer).path
+      #referer = URI(request.referer).path
+      
 
-      case referer
-      when "/videos/#{@video.id}/edit", "/update_video"
+      #case referer
+      #when "/videos/#{@video.id}/edit", "/update_video"
         redirect_to("/videos/#{@video.id}", :notice => "Video updated successfully.")
-      else
-        redirect_back(:fallback_location => "/", :notice => "Video updated successfully.")
-      end
+      #else
+        #redirect_back(:fallback_location => "/", :notice => "Video updated successfully.")
+      #end
     else
       render("videos/edit.html.erb")
     end

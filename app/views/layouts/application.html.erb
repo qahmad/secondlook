@@ -54,7 +54,11 @@
           <!--<li><a href="/admin_tags">Admin Tags</a></li>-->
           <!--<li><a href="/admin_admin_comments">Admin Admin Comments</a></li>-->
           <li><a href="/tags">Tags</a></li>
-          <li><a href="/platforms">Platforms</a></li>
+
+          <% if current_user != nil && current_user.username == 'admin' %>
+            <li><a href="/platforms">Platforms</a></li>
+          <% end %>
+
           <li><a href="/comments">Comments</a></li>
           <li><a href="/users">Users</a></li>
           <li><a href="/videos">Videos</a></li>

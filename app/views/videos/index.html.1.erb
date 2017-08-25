@@ -1,0 +1,143 @@
+<div class="page-header">
+  <h1>
+    Videos
+    <a href="/videos/new" class="btn btn-lg btn-success">New Video</a>
+  </h1>
+</div><div class="row mb-1">
+  <div class="col-md-12">
+    <%= search_form_for @q, :class => collapse_search_form, :id => "videos_filters" do |f| %>
+      <p class="lead">Narrow results:</p>
+
+        <div class="form-group">
+    <%= f.label :caption_cont, "Caption contains" %>
+    <%= f.text_field :caption_cont, :class => "form-control", :placeholder => "Caption contains" %>
+  </div>
+
+<div class="form-group">
+  <%= f.label :starttime, "Starttime" %>
+  <div class="row">
+    <div class='col-md-6 mb-1'>
+      <%= f.text_field :starttime_gteq, :class => "form-control", :placeholder => "Starttime greater than or equal to" %>
+    </div>
+    <div class='col-md-6'>
+      <%= f.text_field :starttime_lteq, :class => "form-control", :placeholder => "Starttime less than or equal to" %>
+    </div>
+  </div>
+</div>
+
+<div class="form-group">
+    <%= f.label :videolink_cont, "Videolink contains" %>
+    <%= f.text_field :videolink_cont, :class => "form-control", :placeholder => "Videolink contains" %>
+  </div>
+
+<div class="form-group">
+          <%= f.label :created_at, "Created at" %>
+          <div class="row">
+            <div class='col-md-6 mb-1'>
+              <div class='input-group date' id='created_atgteqPicker'>
+                  <%= f.text_field :created_at_gteq, :class => "form-control", :placeholder => "Created at greater than or equal to" %>
+                  <span class="input-group-addon">
+                      <span class="glyphicon glyphicon-calendar"></span>
+                  </span>
+              </div>
+            </div>
+
+            <div class='col-md-6'>
+              <div class='input-group date' id='created_atlteqPicker'>
+                  <%= f.text_field :created_at_lteq, :class => "form-control", :placeholder => "Created at less than or equal to" %>
+                  <span class="input-group-addon">
+                      <span class="glyphicon glyphicon-calendar"></span>
+                  </span>
+              </div>
+            </div>
+          </div>
+      </div>
+      <script type="text/javascript">
+          $(function () {
+              $('#created_atgteqPicker').datetimepicker({
+                  format: 'YYYY-MM-DD hh:mm:SS'
+              });
+              $('#created_atlteqPicker').datetimepicker({
+                  useCurrent: false,
+                  format: 'YYYY-MM-DD hh:mm:SS'
+              });
+              $('#created_atgteqPicker').on("dp.change", function (e) {
+                  $('#created_atlteqPicker').data("DateTimePicker").minDate(e.date);
+              });
+              $('#created_atlteqPicker').on("dp.change", function (e) {
+                  $('#created_atgteqPicker').data("DateTimePicker").maxDate(e.date);
+              });
+          });
+      </script>
+
+        <div class="form-group">
+      <%= f.label :user_email_cont, "User email contains" %>
+      <%= f.text_field :user_email_cont, :class => "form-control", :placeholder => "User email contains" %>
+    </div>
+
+<div class="form-group">
+      <%= f.label :platform_name_cont, "Platform name contains" %>
+      <%= f.text_field :platform_name_cont, :class => "form-control", :placeholder => "Platform name contains" %>
+    </div>
+
+      <%= f.submit :class => "btn btn-primary btn-block mb-1" %>
+
+      <a href="/videos" class="btn btn-default btn-block mb-1">Clear filters</a>
+    <% end %>
+    <a class="btn btn-default btn-block mb-1" data-toggle="collapse" href="#videos_filters">
+      Show Filters
+    </a>
+  </div>
+</div>
+
+<div class="row">
+  <div class="col-md-12">
+    <table class="table table-striped table-hover">
+      <tr>
+        <th>Caption</th>
+        <th>Video Link</th>
+        <th>Start Time</th>
+        <th>User</th>
+        <th>Platform</th>
+        <th>Actions</th>
+      </tr>
+
+      <% @videos.each do |video| %>
+      <tr>
+        <td><%= video.caption %></td>
+        <td><iframe width="740" height="400" src="<%= video.platform.embed_link %>/<%= video.videolink %>?start=<%= video.starttime %>" frameborder="0" allowfullscreen></iframe></td>
+        <td>
+          <%= Time.at(video.starttime).utc.strftime("%H:%M:%S") %>
+        </td>
+        <td>
+          <% if video.user.present? %>
+            <a href="/users/<%= video.user.id %>">
+              <%= video.user.username %>
+            </a>
+          <% end %>
+        </td>
+        <td>
+          <% if video.platform.present? %>
+            <a href="/platforms/<%= video.platform.id %>">
+              <%= video.platform.name %>
+            </a>
+          <% end %>
+        </td>
+        <td>
+
+          <div class="btn-group btn-group-justified">
+            <a href="/videos/<%= video.id %>" class="btn btn-primary"><i class="fa fa-chevron-left"></i></a>
+            
+            <% if current_user == video.user %>
+              <a href="/videos/<%= video.id %>/edit" class="btn btn-warning"><i class="fa fa-edit"></i></a>
+              <a href="/delete_video/<%= video.id %>" class="btn btn-danger" rel="nofollow"><i class="fa fa-trash-o"></i></a>
+            <% end %>
+          </div>
+        
+        </td>
+      </tr>
+      <% end %>
+    </table>
+    <%= paginate @videos, theme: 'twitter-bootstrap-4' %>
+  </div>
+</div>
