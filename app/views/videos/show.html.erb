@@ -2,158 +2,253 @@
   <h3>Video #<%= @video.id %></h3>
 </div>
 
-<div class="row">
-  <div class="col-md-12 mb-2">
-    <dl class="dl-horizontal">
-      <dt>Caption</dt>
-      <dd><%= @video.caption %></dd>
+<!--<div class="row">-->
+<!--  <div class="col-md-12 mb-2">-->
+<!--    <dl class="dl-horizontal">-->
+<!--      <dt>Caption</dt>-->
+<!--      <dd><%= @video.caption %></dd>-->
 
-      <dt>Video Link</dt>
-      <dd>
-        <%= @video.platform.embed_link %><%= @video.videolink %>
-        <iframe width="740" height="400" src="<%= @video.platform.embed_link %><%= @video.videolink %>?start=<%= @video.starttime %>" frameborder="0" allowfullscreen></iframe>
-      </dd>
+<!--      <dt>Video Link</dt>-->
+<!--      <dd>-->
+<!--        <%= @video.platform.embed_link %><%= @video.videolink %>-->
+<!--        <iframe width="740" height="400" src="<%= @video.platform.embed_link %><%= @video.videolink %>?start=<%= @video.starttime %>" frameborder="0" allowfullscreen></iframe>-->
+<!--      </dd>-->
 
-      <dt>Start Time</dt>
-      <dd><%= Time.at(@video.starttime).utc.strftime("%H:%M:%S") %></dd>
+<!--      <dt>Start Time</dt>-->
+<!--      <dd><%= Time.at(@video.starttime).utc.strftime("%H:%M:%S") %></dd>-->
 
-      <dt>User</dt>
-      <dd>
-        <% if @video.user.present? %>
-          <a href="/users/<%= @video.user_id %>">
-            <%= @video.user.username %>
-          </a>
-        <% end %>
-      </dd>
+<!--      <dt>User</dt>-->
+<!--      <dd>-->
+<!--        <% if @video.user.present? %>-->
+<!--          <a href="/users/<%= @video.user_id %>">-->
+<!--            <%= @video.user.username %>-->
+<!--          </a>-->
+<!--        <% end %>-->
+<!--      </dd>-->
 
-      <dt>Platform</dt>
-      <dd>
-        <% if @video.platform.present? %>
-          <a href="/platforms/<%= @video.platform_id %>">
-            <%= @video.platform.name %>
-          </a>
-        <% end %>
-      </dd>
+<!--      <dt>Platform</dt>-->
+<!--      <dd>-->
+<!--        <% if @video.platform.present? %>-->
+<!--          <a href="/platforms/<%= @video.platform_id %>">-->
+<!--            <%= @video.platform.name %>-->
+<!--          </a>-->
+<!--        <% end %>-->
+<!--      </dd>-->
 
-    </dl>
+<!--    </dl>-->
 
-    <div class="btn-group btn-group-justified">
-      <a href="/videos" class="btn btn-primary">
-        Back
-      </a>
-      <% if current_user == @video.user %>
-        <a href="/videos/<%= @video.id %>/edit" class="btn btn-warning">
-          Edit
-        </a>
-        <a href="/delete_video/<%= @video.id %>" class="btn btn-danger" rel="nofollow">
-          Delete
-        </a>
-      <% end %>
-    </div>
-  </div>
-</div>
+<!--    <div class="btn-group btn-group-justified">-->
+<!--      <a href="/videos" class="btn btn-primary">-->
+<!--        Back-->
+<!--      </a>-->
+<!--      <% if current_user == @video.user %>-->
+<!--        <a href="/videos/<%= @video.id %>/edit" class="btn btn-warning">-->
+<!--          Edit-->
+<!--        </a>-->
+<!--        <a href="/delete_video/<%= @video.id %>" class="btn btn-danger" rel="nofollow">-->
+<!--          Delete-->
+<!--        </a>-->
+<!--      <% end %>-->
+<!--    </div>-->
+<!--  </div>-->
+<!--</div>-->
 
 <!-- A Video has many tags -->
 
-<div class="row">
-  <div class="col-md-12">
-    <ul class="list-group">
-      <li class="list-group-item list-group-item-info">
-        Tags
-      </li>
+<!--<div class="row">-->
+<!--  <div class="col-md-12">-->
+<!--    <ul class="list-group">-->
+<!--      <li class="list-group-item list-group-item-info">-->
+<!--        Tags-->
+<!--      </li>-->
 
-      <% @video.tags.each do |tag| %>
-        <li class="list-group-item">
-          <a href="/tags/<%= tag.id %>">
-            <%= tag.user_id %>
-          </a>
-          <div class="btn-group btn-group-xs pull-right">
-            <a href="/tags/<%= tag.id %>" class="btn btn-primary">
-              <i class="fa fa-search-plus"></i>
-            </a>
-            <a href="/tags/<%= tag.id %>/edit" class="btn btn-warning">
-              <i class="fa fa-edit"></i>
-            </a>
-            <a href="/delete_tag/<%= tag.id %>" class="btn btn-danger" rel="nofollow">
-              <i class="fa fa-trash-o"></i>
-            </a>
-          </div>
-        </li>
-      <% end %>
+<!--      <% @video.tags.each do |tag| %>-->
+<!--        <li class="list-group-item">-->
+<!--          <a href="/tags/<%= tag.id %>">-->
+<!--            <%= tag.user_id %>-->
+<!--          </a>-->
+<!--          <div class="btn-group btn-group-xs pull-right">-->
+<!--            <a href="/tags/<%= tag.id %>" class="btn btn-primary">-->
+<!--              <i class="fa fa-search-plus"></i>-->
+<!--            </a>-->
+<!--            <a href="/tags/<%= tag.id %>/edit" class="btn btn-warning">-->
+<!--              <i class="fa fa-edit"></i>-->
+<!--            </a>-->
+<!--            <a href="/delete_tag/<%= tag.id %>" class="btn btn-danger" rel="nofollow">-->
+<!--              <i class="fa fa-trash-o"></i>-->
+<!--            </a>-->
+<!--          </div>-->
+<!--        </li>-->
+<!--      <% end %>-->
 
-      <li class="list-group-item">
-        <form action="/create_tag" method="post">
+<!--      <li class="list-group-item">-->
+<!--        <form action="/create_tag" method="post">-->
       <!-- Hidden input for authenticity token to protect from forgery -->
-      <input name="authenticity_token" type="hidden" value="<%= form_authenticity_token %>">
+<!--      <input name="authenticity_token" type="hidden" value="<%= form_authenticity_token %>">-->
 
       <!-- Label and input for user_id -->
-      <input type="hidden" name="user_id" value="<%= current_user.id %>">
+<!--      <input type="hidden" name="user_id" value="<%= current_user.id %>">-->
 
       <!-- Label and input for video_id -->
-      <input type="hidden" name="video_id" value="<%= @video.id %>">
+<!--      <input type="hidden" name="video_id" value="<%= @video.id %>">-->
 
-      <button class="btn btn-block btn-success">
-        Create Tag
-      </button>
-    </form>
-      </li>
-    </ul>
-  </div>
-</div>
+<!--      <button class="btn btn-block btn-success">-->
+<!--        Create Tag-->
+<!--      </button>-->
+<!--    </form>-->
+<!--      </li>-->
+<!--    </ul>-->
+<!--  </div>-->
+<!--</div>-->
 
 <!-- A Video has many comments -->
 
-<div class="row">
-  <div class="col-md-12">
-    <ul class="list-group">
-      <li class="list-group-item list-group-item-info">
-        Comments
-      </li>
+<!--<div class="row">-->
+<!--  <div class="col-md-12">-->
+<!--    <ul class="list-group">-->
+<!--      <li class="list-group-item list-group-item-info">-->
+<!--        Comments-->
+<!--      </li>-->
 
-      <% @video.comments.each do |comment| %>
-        <li class="list-group-item">
-          <a href="/comments/<%= comment.id %>">
-            <%= comment.user_id %>
-          </a>
-          <div class="btn-group btn-group-xs pull-right">
-            <a href="/comments/<%= comment.id %>" class="btn btn-primary">
-              <i class="fa fa-search-plus"></i>
-            </a>
-            <a href="/comments/<%= comment.id %>/edit" class="btn btn-warning">
-              <i class="fa fa-edit"></i>
-            </a>
-            <a href="/delete_comment/<%= comment.id %>" class="btn btn-danger" rel="nofollow">
-              <i class="fa fa-trash-o"></i>
-            </a>
-          </div>
-        </li>
-      <% end %>
+<!--      <% @video.comments.each do |comment| %>-->
+<!--        <li class="list-group-item">-->
+<!--          <a href="/comments/<%= comment.id %>">-->
+<!--            <%= comment.user_id %>-->
+<!--          </a>-->
+<!--          <div class="btn-group btn-group-xs pull-right">-->
+<!--            <a href="/comments/<%= comment.id %>" class="btn btn-primary">-->
+<!--              <i class="fa fa-search-plus"></i>-->
+<!--            </a>-->
+<!--            <a href="/comments/<%= comment.id %>/edit" class="btn btn-warning">-->
+<!--              <i class="fa fa-edit"></i>-->
+<!--            </a>-->
+<!--            <a href="/delete_comment/<%= comment.id %>" class="btn btn-danger" rel="nofollow">-->
+<!--              <i class="fa fa-trash-o"></i>-->
+<!--            </a>-->
+<!--          </div>-->
+<!--        </li>-->
+<!--      <% end %>-->
 
-      <li class="list-group-item">
-        <form action="/create_comment" method="post">
+<!--      <li class="list-group-item">-->
+<!--        <form action="/create_comment" method="post">-->
       <!-- Hidden input for authenticity token to protect from forgery -->
-      <input name="authenticity_token" type="hidden" value="<%= form_authenticity_token %>">
+<!--      <input name="authenticity_token" type="hidden" value="<%= form_authenticity_token %>">-->
 
       <!-- Label and input for user_id -->
-      <input type="hidden" name="user_id" value="<%= current_user.id %>">
+<!--      <input type="hidden" name="user_id" value="<%= current_user.id %>">-->
 
       <!-- Label and input for video_id -->
-      <input type="hidden" name="video_id" value="<%= @video.id %>">
+<!--      <input type="hidden" name="video_id" value="<%= @video.id %>">-->
 
       <!-- Label and input for body -->
-      <div class="form-group">
-        <label for="body" class="control-label">
-          Body
-        </label>
+<!--      <div class="form-group">-->
+<!--        <label for="body" class="control-label">-->
+<!--          Body-->
+<!--        </label>-->
 
-        <input type="text" id="body" name="body" placeholder="Body" class="form-control" value="">
+<!--        <input type="text" id="body" name="body" placeholder="Body" class="form-control" value="">-->
+<!--      </div>-->
+
+<!--      <button class="btn btn-block btn-success">-->
+<!--        Create Comment-->
+<!--      </button>-->
+<!--    </form>-->
+<!--      </li>-->
+<!--    </ul>-->
+<!--  </div>-->
+<!--</div>-->
+
+
+
+
+<div class="row">
+  <div class="col-md-8 col-md-offset-2">
+    <div class="panel panel-default">
+      <div class="panel-heading">
+        <h3 class="panel-title">
+          <a href="/users/<%= @video.user.id %> "><%= @video.user.username %></a>
+          <small>
+            <%= time_ago_in_words(@video.created_at) %> ago
+          </small>
+        </h3>
       </div>
 
-      <button class="btn btn-block btn-success">
-        Create Comment
-      </button>
-    </form>
-      </li>
-    </ul>
+      <div class="panel-body" align="center">
+        <iframe width="666" height="360" src="<%= @video.platform.embed_link %>/<%= @video.videolink %>?start=<%= @video.starttime %>" frameborder="0" allowfullscreen></iframe>
+
+        <div class="media-body">
+          <b><%= @video.caption %> at <%= Time.at(@video.starttime).utc.strftime("%H:%M:%S") %></b>
+        </div>
+
+    <% @video.comments.each do |comment| %>
+
+      <ul class="media-list">
+
+        <li class="media">
+          <div class="media-body" align="left">
+            <h6 class="media-heading">
+              <a href="/users/<%= comment.user_id %>"><%= comment.user.username %></a>
+              <small>
+                <%= time_ago_in_words(comment.created_at) %> ago
+              </small>
+            </h6>
+            <%= comment.body %>
+          </div>
+        </li>
+      </ul>
+
+    <% end %>
+
+
+      <ul class="media-list">
+        <li class="media">
+          <div class="media-body">
+            <form action="/create_comment" method="post">
+              <!-- Hidden input for authenticity token to protect from forgery -->
+              <input name="authenticity_token" type="hidden" value="12sJz9qQY6R+2CaxrGsRgMe/3wXOAIIqqkDSFHYK1tXc2Ph2UX3zSc17IWlIWCgfKapscHGahGQeqeDJ+DgL6w==">
+
+              <input type="hidden" name="video_id" value="<%= @video.id%>">
+
+              <input type="hidden" name="user_id" value="<%= current_user.id %>">
+
+              <!-- Label and input for body -->
+              <div class="form-group">
+                <label for="body" class="sr-only">
+                  Body
+                </label>
+
+                <div class="input-group">
+                  <input type="text" id="body" name="body" class="form-control" placeholder="Add a comment..." required>
+
+                  <span class="input-group-btn">
+                    <button class="btn btn-default" type="submit">
+                      <i class="fa fa-commenting-o"></i>
+                    </button>
+                  </span>
+                </div><!-- /input-group -->
+              </div>
+            </form>
+          </div>
+        </li>
+      </ul>
+
+        <div class="btn-group btn-group-justified">
+          <a href="/videos" class="btn btn-primary">
+            <i class="fa fa-chevron-left"></i>
+          </a>
+          <% if current_user.id == @video.user_id %>
+  
+              <a href="/videos/<%= @video.id %>/edit" class="btn btn-warning">
+                <i class="fa fa-edit"></i>
+              </a>
+              <a href="/delete_video/<%= @video.id %>" class="btn btn-danger" rel="nofollow">
+                <i class="fa fa-trash-o"></i>
+              </a>
+                  
+          <% end %>  
+            </div>
+
+      </div>
+    </div>
   </div>
 </div>

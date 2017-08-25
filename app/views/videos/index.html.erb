@@ -75,7 +75,7 @@
           <iframe width="666" height="360" src="<%= video.platform.embed_link %>/<%= video.videolink %>?start=<%= video.starttime %>" frameborder="0" allowfullscreen></iframe>
 
           <div class="media-body">
-            <b><%= video.caption %> at <%= Time.at(video.starttime).utc.strftime("%H:%M:%S") %></b>
+            <a href="/videos/<%= video.id %>"><%= video.caption %> at <%= Time.at(video.starttime).utc.strftime("%H:%M:%S") %></a>
           </div>
 
       <% video.comments.each do |comment| %>
