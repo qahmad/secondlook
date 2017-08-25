@@ -71,6 +71,7 @@ Rails.application.routes.draw do
 
   # UPDATE
   get "/videos/:id/edit", :controller => "videos", :action => "edit"
+  # get "/update_video/:id", :controller => "videos", :action => "update"
   post "/update_video/:id", :controller => "videos", :action => "update"
 
   # DELETE

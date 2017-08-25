@@ -1,4 +1,5 @@
 require 'uri'
+require 'video_info'
 
 class VideosController < ApplicationController
   before_action :current_user_must_be_video_user, :only => [:show, :edit, :update, :destroy]
@@ -29,6 +30,10 @@ class VideosController < ApplicationController
   def new
     @video = Video.new
 
+    @videohour = 0
+    @videomin = 0
+    @videosec = 0
+
     render("videos/new.html.erb")
   end
 
@@ -37,16 +42,23 @@ class VideosController < ApplicationController
 
     @video.caption = params[:caption]
     @video.videolink = params[:videolink]
-    @video.starttime = params[:starttime]
     @video.user_id = params[:user_id]
     @video.platform_id = params[:platform_id]
+
+    # @video.starttime = params[:starttime]
+    @video.starttime = (params[:videohour].to_i * 3600) + (params[:videomin].to_i * 60) + (params[:videosec].to_i)
+
 
     if "youtu".in? @video.videolink.downcase
 
       query_string = URI.parse(@video.videolink).query
       parameters = Hash[URI.decode_www_form(query_string)]
       
-      @video.videolink = @video.platform.embed_link + parameters['v'] + '?start=' + @video.starttime.to_s
+      @video.videolink = parameters['v'] #@video.platform.embed_link + parameters['v'] + '?start=' + @video.starttime.to_s
+      
+      # Couldn't get video_info gem to work; leaving code below to come back and try another day
+      # v = VideoInfo.new(@video.videolink).duration
+      # @video.starttime = v.duration
 
     end
 
@@ -69,6 +81,10 @@ class VideosController < ApplicationController
   def edit
     @video = Video.find(params[:id])
 
+    @videohour = Time.at(@video.starttime).utc.strftime("%H").to_i.to_s
+    @videomin = Time.at(@video.starttime).utc.strftime("%M").to_i.to_s
+    @videosec = Time.at(@video.starttime).utc.strftime("%S").to_i.to_s
+
     render("videos/edit.html.erb")
   end
 
@@ -77,9 +93,25 @@ class VideosController < ApplicationController
 
     @video.caption = params[:caption]
     @video.videolink = params[:videolink]
-    @video.starttime = params[:starttime]
     @video.user_id = params[:user_id]
     @video.platform_id = params[:platform_id]
+
+    # @video.starttime = params[:starttime]
+    @video.starttime = (params[:videohour].to_i * 3600) + (params[:videomin].to_i * 60) + (params[:videosec].to_i)
+
+    if "youtu".in? @video.videolink.downcase
+
+      query_string = URI.parse(@video.videolink).query
+      parameters = Hash[URI.decode_www_form(query_string)]
+      
+      @video.videolink = parameters['v'] #@video.platform.embed_link + parameters['v'] + '?start=' + @video.starttime.to_s
+      
+      # Couldn't get video_info gem to work; leaving code below to come back and try another day
+      # v = VideoInfo.new(@video.videolink).duration
+      # @video.starttime = v.duration
+
+    end
+
 
     save_status = @video.save
 

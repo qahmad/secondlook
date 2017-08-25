@@ -64,3 +64,4 @@ gem "wdm" if Gem.win_platform?
 
 
 gem "web_git", git: "https://github.com/firstdraft/web_git"
+gem "video_info"

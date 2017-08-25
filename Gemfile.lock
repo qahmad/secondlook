@@ -97,9 +97,11 @@ GEM
       i18n (~> 0.7)
       minitest (~> 5.1)
       tzinfo (~> 1.1)
+    ansi (1.5.0)
     arbre (1.1.1)
       activesupport (>= 3.0.0)
     arel (7.1.4)
+    ast (2.3.0)
     autoprefixer-rails (7.1.2.6)
       execjs
     bcrypt (3.1.11)
@@ -146,6 +148,7 @@ GEM
       actionpack (>= 4.1, < 5.2)
       activesupport (>= 4.1, < 5.2)
     i18n (0.8.6)
+    iso8601 (0.9.1)
     jbuilder (2.7.0)
       activesupport (>= 4.2.0)
       multi_json (>= 1.2)
@@ -174,6 +177,7 @@ GEM
     momentjs-rails (2.17.1)
       railties (>= 3.1)
     multi_json (1.12.1)
+    net_http_timeout_errors (0.3.0)
     nio4r (2.1.0)
     nokogiri (1.8.0)
       mini_portile2 (~> 2.2.0)
@@ -182,6 +186,9 @@ GEM
     octicons_helper (4.0.1)
       octicons (~> 4.0)
       rails
+    oga (2.10)
+      ast
+      ruby-ll (~> 2.1)
     orm_adapter (0.5.0)
     pg (0.21.0)
     polyamorous (1.3.1)
@@ -234,6 +241,9 @@ GEM
       railties (>= 4.2.0, < 5.3)
     rollbar (2.15.0)
       multi_json
+    ruby-ll (2.1.2)
+      ansi
+      ast
     sass (3.5.1)
       sass-listen (~> 4.0.0)
     sass-listen (4.0.0)
@@ -267,6 +277,10 @@ GEM
       tzinfo (>= 1.0.0)
     uglifier (3.2.0)
       execjs (>= 0.3.0, < 3)
+    video_info (2.7)
+      iso8601 (~> 0.9.1)
+      net_http_timeout_errors (~> 0.3.0)
+      oga (~> 2.7)
     warden (1.2.7)
       rack (>= 1.0)
     web-console (3.5.1)
@@ -308,6 +322,7 @@ DEPENDENCIES
   starter_generators!
   tzinfo-data
   uglifier (>= 1.3.0)
+  video_info
   web-console
   web_git!
 

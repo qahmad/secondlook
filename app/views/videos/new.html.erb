@@ -9,7 +9,7 @@
 <% end %>
 
 <div class="page-header">
-  <h3>Add Video</h3>
+  <h3>Link New Video</h3>
 </div>
 
 <div class="row">
@@ -33,7 +33,8 @@
           Video Link
         </label>
 
-        <input type="text" id="videolink" name="videolink" placeholder="Videolink" class="form-control" value="<%= @video.videolink %>">
+        <input type="text" id="videolink" name="videolink" placeholder="Videolink" class="form-control"
+          value="<% if @video.errors.any? %>https://www.youtube.com/watch?v=<% end %><%= @video.videolink %>">
       </div>
 
       <!-- Label and input for starttime -->
@@ -42,7 +43,29 @@
           Start Time
         </label>
 
-        <input type="text" id="starttime" name="starttime" placeholder="Starttime" class="form-control" value="<%= @video.starttime %>">
+        <!--<input type="text" id="starttime" name="starttime" placeholder="Starttime" class="form-control" value="<%= @video.starttime %>">-->
+
+        <table>
+          <tr>
+            <td>
+              <%= select_tag(:videohour, options_for_select(0..24, @videohour), :class => "form-control") %> 
+            </td>
+            <td>hour(s)</td>
+            <td>
+              <%= select_tag(:videomin, options_for_select(0..60, @videomin), :class => "form-control") %> 
+            </td>
+            <td>minute(s)</td>
+            <td>
+              <%= select_tag(:videosec, options_for_select(0..60, @videosec), :class => "form-control") %>
+            </td>
+            <td>
+              second(s)
+            </td>
+          </tr>
+        </table>
+    
+      <% @video.starttime = @videohour.to_i + @videomin.to_i + @videosec.to_i %>
+
       </div>
 
       <!-- Label and input for user_id -->

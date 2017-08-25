@@ -105,12 +105,14 @@
       <% @videos.each do |video| %>
       <tr>
         <td><%= video.caption %></td>
-        <td><iframe width="740" height="400" src="<%= video.videolink %>" frameborder="0" allowfullscreen></iframe></td>
-        <td><%= video.starttime %></td>
+        <td><iframe width="740" height="400" src="<%= video.platform.embed_link %>/<%= video.videolink %>?start=<%= video.starttime %>" frameborder="0" allowfullscreen></iframe></td>
+        <td>
+          <%= Time.at(video.starttime).utc.strftime("%H:%M:%S") %>
+        </td>
         <td>
           <% if video.user.present? %>
             <a href="/users/<%= video.user.id %>">
-              <%= video.user.email %>
+              <%= video.user.username %>
             </a>
           <% end %>
         </td>

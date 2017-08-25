@@ -8,17 +8,20 @@
       <dt>Caption</dt>
       <dd><%= @video.caption %></dd>
 
-      <dt>Videolink</dt>
-      <dd><%= @video.videolink %></dd>
+      <dt>Video Link</dt>
+      <dd>
+        <%= @video.platform.embed_link %><%= @video.videolink %>
+        <iframe width="740" height="400" src="<%= @video.platform.embed_link %><%= @video.videolink %>?start=<%= @video.starttime %>" frameborder="0" allowfullscreen></iframe>
+      </dd>
 
-      <dt>Starttime</dt>
-      <dd><%= @video.starttime %></dd>
+      <dt>Start Time</dt>
+      <dd><%= Time.at(@video.starttime).utc.strftime("%H:%M:%S") %></dd>
 
       <dt>User</dt>
       <dd>
         <% if @video.user.present? %>
           <a href="/users/<%= @video.user_id %>">
-            <%= @video.user.email %>
+            <%= @video.user.username %>
           </a>
         <% end %>
       </dd>
